@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87551155f6151d4e9a1a838cb107b9d, type: 3}
+  m_Name: Doc
+  m_EditorClassIdentifier: 
+  CardName: The Doc
+  CharacterName: Dorctor Al "Doc" Patch
+  Description: Doc can pull 3 cards from his damage pile and play one of them to
+    prevent incoming damage. Afterwards, the pulled cards are returned to the damage
+    pile.
+  Cooldown: 4
+  Icon: {fileID: 21300000, guid: 7c71aa554dca8884e8c6d5121c3de611, type: 3}
