@@ -1,5 +1,9 @@
 sceneSetups:
 - path: Assets/Scenes/Card testing.unity
   isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/varij-test.unity
+  isLoaded: 1
   isActive: 1
   isSubScene: 0
