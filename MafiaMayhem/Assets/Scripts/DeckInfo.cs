@@ -8,6 +8,7 @@ public class DeckInfo : MonoBehaviour
     private List<GameObject> cards;
     private int count;
     public DeckDisplay display;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,11 +35,17 @@ public class DeckInfo : MonoBehaviour
             Debug.Log("You tried to draw a non-card object");
         }
     }
-    //Removes top card of deck, future add it to player's hand
-    public void DrawCard()
+    //Removes top card of deck, returns the card object
+    public GameObject DrawCard()
     {
+        if(count == 0)
+        {
+            return null;
+        }
+        GameObject drawnCard = cards[0];
         cards.RemoveAt(0);
         ChangeCount(-1);
+        return drawnCard;
     }
 
     void ChangeCount(int amount)
@@ -50,5 +57,16 @@ public class DeckInfo : MonoBehaviour
     public int getCount()
     {
         return count;
+    }
+
+    public void ShuffleDeck()
+    {
+        for (int i = 0; i < cards.Count; i++)
+        {
+            GameObject temp = cards[i];
+            int randomIndex = Random.Range(i, cards.Count);
+            cards[i] = cards[randomIndex];
+            cards[randomIndex] = temp;
+        }
     }
 }
