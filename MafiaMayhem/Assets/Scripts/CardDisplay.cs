@@ -20,4 +20,12 @@ public class CardDisplay : MonoBehaviour
         Description.text = card.Description;
         icon.sprite = card.Icon;
     }
+
+    public void setNewCard(CardInfo newCard)
+    {
+        card = newCard;
+        name.text = newCard.CardName;
+        Description.text = newCard.Description;
+        icon.sprite = newCard.Icon;
+    }
 }

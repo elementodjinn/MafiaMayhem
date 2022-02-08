@@ -42,7 +42,8 @@ public class DeckInfo : MonoBehaviour
         {
             return null;
         }
-        GameObject drawnCard = cards[0];
+        int index = Random.Range(0, count);
+        GameObject drawnCard = cards[index];
         cards.RemoveAt(0);
         ChangeCount(-1);
         return drawnCard;
