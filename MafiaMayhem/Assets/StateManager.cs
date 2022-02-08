@@ -2,39 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI thisText;
-    [SerializeField] private Image backdrop;
-    [SerializeField] private Button nextButton;
-    [SerializeField] private TextMeshProUGUI buttonText;
+    private int currentTurn = 1;
 
-    private int turnCount = 1;
+    [SerializeField] private TMP_Text betweenTurnsText;
 
-    private void Start()
+    public void updateTurn()
     {
-        thisText.text = "Player 1, pick a card";
-        backdrop.enabled = true;
-        nextButton.enabled = true;
-    }
-    public void determineCurrentPhase()
-    {
-        turnCount++;
-        if (turnCount == 1)
+        currentTurn++;
+        if (currentTurn == 1)
         {
-            thisText.text = "Player 1, pick a card. Player 2, eyes off the screen!";
+            betweenTurnsText.text = "Player 1's turn";
         }
-        else if(turnCount == 2)
+        else if (currentTurn == 2)
         {
-            thisText.text = "Player 2, pick a card. Player 1, no peeking!";
+            betweenTurnsText.text = "Player 2's turn";
         }
-        else if(turnCount == 3)
+        else if(currentTurn == 3)
         {
-            thisText.text = "Ready? FIGHT!";
-            buttonText.text = "Flip Cards";
-            turnCount = 0;
+            betweenTurnsText.text = "Ready to flip?";
+            currentTurn = 0;
         }
     }
 }
