@@ -32,19 +32,21 @@ public class DeckInfo : MonoBehaviour
         }
         else
         {
-            Debug.Log("You tried to draw a non-card object");
+            //Debug.Log("You tried to draw a non-card object");
         }
     }
     //Removes top card of deck, returns the card object
     public GameObject DrawCard()
     {
-        if(count == 0)
+        count = cards.Count;
+        //Debug.Log("Count: " + count);
+        if (count == 0)
         {
             return null;
         }
-        int index = Random.Range(0, count);
+        int index = Random.Range(0, count-1);
         GameObject drawnCard = cards[index];
-        cards.RemoveAt(0);
+        cards.RemoveAt(index);
         ChangeCount(-1);
         return drawnCard;
     }

@@ -8,17 +8,6 @@ public class DeckDiscardHandLinker : MonoBehaviour
     private DeckInfo deck;
     [SerializeField]
     private DeckInfo discard;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ShuffleDiscardIntoDeck()
     {
