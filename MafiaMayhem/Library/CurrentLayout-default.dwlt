@@ -452,18 +452,18 @@ MonoBehaviour:
       m_ExpandedIDs: 00faffffde41000038420000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: StateManager
+        m_OriginalName: StateManager
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 16686
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -495,8 +495,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 320.80002
     y: 73.6
-    width: 747.60004
-    height: 422.2
+    width: 747
+    height: 422
   m_ViewDataDictionary: {fileID: 0}
   m_ShowContextualTools: 0
   m_WindowGUID: a580a7d25f904e243aaf457337cef194
@@ -509,9 +509,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 278.9017, y: 160.76775, z: -74.491486}
+    m_Target: {x: 194.46985, y: 362.84637, z: 0.060894012}
     speed: 2
-    m_Value: {x: 278.9017, y: 160.76775, z: -74.491486}
+    m_Value: {x: 194.46985, y: 362.84637, z: 0.060894012}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -562,9 +562,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 184.02185
+    m_Target: 24.360165
     speed: 2
-    m_Value: 184.02185
+    m_Value: 24.360165
   m_Ortho:
     m_Target: 1
     speed: 2

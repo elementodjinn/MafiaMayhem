@@ -8,6 +8,8 @@ public class DeckDiscardHandLinker : MonoBehaviour
     private DeckInfo deck;
     [SerializeField]
     private DeckInfo discard;
+    [SerializeField]
+    private HandManager hand;
 
     public void ShuffleDiscardIntoDeck()
     {
@@ -22,8 +24,18 @@ public class DeckDiscardHandLinker : MonoBehaviour
         }
     }
 
+    //Send a card straight from the hand to the discard, mainly a proof of concept
     public void SendCardFromDeckToDiscard()
     {
         discard.AddCard(deck.DrawCard());
+    }
+
+    //Taking Damage, for now, doesn't take into account hand.
+    public void TakeExtraDamage(int amount)
+    {
+        for(int i = 0; i < amount; i++)
+        {
+            deck.DrawCard();
+        }
     }
 }
