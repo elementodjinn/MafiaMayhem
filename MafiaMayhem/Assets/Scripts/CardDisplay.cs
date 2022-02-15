@@ -28,4 +28,9 @@ public class CardDisplay : MonoBehaviour
         Description.text = newCard.Description;
         icon.sprite = newCard.Icon;
     }
+
+    public CardInfo getCard()
+    {
+        return card;
+    }
 }

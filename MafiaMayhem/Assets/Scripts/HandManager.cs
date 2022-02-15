@@ -52,4 +52,9 @@ public class HandManager : MonoBehaviour
             visibleCards[i].GetComponent<CardDisplay>().setNewCard(currentCard.GetComponent<CardDisplay>().card);
         }
     }
+
+    public CardInfo getCardInHand(int i)
+    {
+        return currentHand[i].GetComponent<CardDisplay>().card;
+    }
 }

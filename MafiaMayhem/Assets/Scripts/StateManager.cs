@@ -12,6 +12,7 @@ public class StateManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buttonText;
 
     [SerializeField] private GameObject handDisplay;
+    [SerializeField] private GameObject PlayedCards;
 
     [SerializeField] private HandManager Player1Hand;
     [SerializeField] private HandManager Player2Hand;
@@ -30,6 +31,7 @@ public class StateManager : MonoBehaviour
         Debug.Log(turnCount);
         if (turnCount == 1)
         {
+            PlayedCards.SetActive(false);
             handDisplay.SetActive(true);
             Player1Hand.showHand();
             thisText.text = "Player 1, pick a card. Player 2, eyes off the screen!";
@@ -41,10 +43,16 @@ public class StateManager : MonoBehaviour
         }
         else if(turnCount == 3)
         {
+            PlayedCards.SetActive(true);
             handDisplay.SetActive(false);
             thisText.text = "Ready? FIGHT!";
             buttonText.text = "Flip Cards";
             turnCount = 0;
         }
+    }
+
+    public int currentplayerTurn()
+    {
+        return turnCount;
     }
 }
