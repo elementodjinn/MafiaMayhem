@@ -20,7 +20,6 @@ public class StateManager : MonoBehaviour
 
     private void Start()
     {
-        Player1Hand.showHand();
         thisText.text = "Player 1, pick a card. Player 2, eyes off the screen!";
         backdrop.enabled = true;
         nextButton.enabled = true;

@@ -25,12 +25,12 @@ public class HandManager : MonoBehaviour
                 GameObject currentCard = Deck.DrawCard();
                 if (currentCard)
                 {
-                    //Debug.Log(currentCard.GetComponent<CardDisplay>().card.name);
+                    Debug.Log(currentCard.GetComponent<CardDisplay>().card.name);
                     currentHand.Add(currentCard);
                 }
                 else
                 {
-                    //Debug.Log("no CurrentCard");
+                    Debug.Log("no CurrentCard");
                 }
 
             }
