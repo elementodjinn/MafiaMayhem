@@ -8,32 +8,38 @@ public class HandManager : MonoBehaviour
 
     [SerializeField] private DeckInfo Deck;
 
+    [SerializeField] private DeckDiscardHandLinker DDHL;
+
     [SerializeField] private GameObject[] visibleCards;
     // Start is called before the first frame update
     void Start()
     {
         currentHand = new List<GameObject>();
-        drawHand();
+        drawFullHand();
     }
 
-    public void drawHand()
+    public void drawFullHand()
     {
         if(currentHand.Count == 0)
         {
             for (int i = 0; i < 5; i++)
             {
-                GameObject currentCard = Deck.DrawCard();
-                if (currentCard)
-                {
-                    Debug.Log(currentCard.GetComponent<CardDisplay>().card.name);
-                    currentHand.Add(currentCard);
-                }
-                else
-                {
-                    Debug.Log("no CurrentCard");
-                }
-
+                drawCard();
             }
+        }
+    }
+
+    public void drawCard()
+    {
+        GameObject currentCard = Deck.DrawCard();
+        if (currentCard)
+        {
+            //Debug.Log(currentCard.GetComponent<CardDisplay>().card.name);
+            currentHand.Add(currentCard);
+        }
+        else
+        {
+            //Debug.Log("no CurrentCard");
         }
     }
 
