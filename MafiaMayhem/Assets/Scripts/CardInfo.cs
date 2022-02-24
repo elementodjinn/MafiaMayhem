@@ -9,10 +9,10 @@ public class CardInfo : ScriptableObject
     public string Description;
     public Sprite Icon;
 
-    public CardInfo[] beats;
+    public List<CardInfo> beats;
 
-    public CardInfo[] LosesTo;
+    public List<CardInfo> LosesTo;
 
-    public CardInfo[] Minigame;
+    public List<CardInfo> Minigame;
 
 }

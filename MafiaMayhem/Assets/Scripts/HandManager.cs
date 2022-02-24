@@ -20,13 +20,11 @@ public class HandManager : MonoBehaviour
 
     public void drawFullHand()
     {
-        if(currentHand.Count == 0)
-        {
-            for (int i = 0; i < 5; i++)
+            for (int i = currentHand.Count; i < 5; i++)
             {
                 drawCard();
             }
-        }
+
     }
 
     public void drawCard()
@@ -35,6 +33,12 @@ public class HandManager : MonoBehaviour
         if (currentCard)
         {
             //Debug.Log(currentCard.GetComponent<CardDisplay>().card.name);
+            currentHand.Add(currentCard);
+        }
+        else if (!DDHL.DiscardEmpty())
+        {
+            DDHL.ShuffleDiscardIntoDeck();
+            currentCard = Deck.DrawCard();
             currentHand.Add(currentCard);
         }
         else
@@ -56,5 +60,34 @@ public class HandManager : MonoBehaviour
     public CardInfo getCardInHand(int i)
     {
         return currentHand[i].GetComponent<CardDisplay>().card;
+    }
+
+    //Removes a card from the hand and adds it to the discard pile
+    public void Discard(CardDisplay card)
+    {
+        GameObject cardObject = card.gameObject;
+        RemoveCard(cardObject);
+        DDHL.AddCardToDiscard(card);
+    }
+
+    //Removes a card from the hand
+    public void RemoveCard(GameObject card)
+    {
+        currentHand.Remove(card);
+    }
+
+    public void DiscardWholeHand()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            GameObject card = currentHand[0];
+            currentHand.RemoveAt(0);
+            DDHL.AddCardToDiscard(card.GetComponent<CardDisplay>());
+        }
+    }
+
+    public void TakeDamageFromDeck(int i)
+    {
+        DDHL.TakeExtraDamage(i);
     }
 }

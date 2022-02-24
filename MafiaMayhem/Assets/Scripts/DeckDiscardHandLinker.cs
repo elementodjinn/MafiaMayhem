@@ -11,6 +11,11 @@ public class DeckDiscardHandLinker : MonoBehaviour
     [SerializeField]
     private HandManager hand;
 
+    public void AddCardToDiscard(CardDisplay card)
+    {
+        discard.AddCard(card.gameObject);
+    }
+
     public void ShuffleDiscardIntoDeck()
     {
         discard.ShuffleDeck();
@@ -36,6 +41,18 @@ public class DeckDiscardHandLinker : MonoBehaviour
         for(int i = 0; i < amount; i++)
         {
             deck.DrawCard();
+        }
+    }
+
+    public bool DiscardEmpty()
+    {
+        if(discard.getCount() > 0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }

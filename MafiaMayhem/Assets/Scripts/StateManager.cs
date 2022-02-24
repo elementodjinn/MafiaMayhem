@@ -73,4 +73,13 @@ public class StateManager : MonoBehaviour
     {
         turnCount++;
     }
+
+    public HandManager GetPlayer1Hand()
+    {
+        return Player1Hand;
+    }
+    public HandManager GetPlayer2Hand()
+    {
+        return Player2Hand;
+    }
 }
