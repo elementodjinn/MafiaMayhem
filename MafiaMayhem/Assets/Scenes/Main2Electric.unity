@@ -5569,6 +5569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 987354638}
   - component: {fileID: 987354637}
+  - component: {fileID: 987354639}
   m_Layer: 0
   m_Name: StateManager
   m_TagString: Untagged
@@ -5597,6 +5598,7 @@ MonoBehaviour:
   handButtons: {fileID: 1861488948}
   Player1Hand: {fileID: 1704119685}
   Player2Hand: {fileID: 1053829281}
+  DM: {fileID: 0}
 --- !u!4 &987354638
 Transform:
   m_ObjectHideFlags: 0
@@ -5612,6 +5614,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &987354639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987354636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331f2099bc497ff498d2799e3e8c54bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateManager: {fileID: 987354637}
 --- !u!1 &991500132
 GameObject:
   m_ObjectHideFlags: 0
@@ -8128,7 +8143,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1533072876
 Canvas:
   m_ObjectHideFlags: 0
@@ -10914,7 +10929,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &2030973761
 Canvas:
   m_ObjectHideFlags: 0

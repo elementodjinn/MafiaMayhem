@@ -17,6 +17,7 @@ public class StateManager : MonoBehaviour
 
     [SerializeField] private HandManager Player1Hand;
     [SerializeField] private HandManager Player2Hand;
+    [SerializeField] private DecisionMaker DM;
 
     private int turnCount = 1;
     private bool firstTurn = true;
@@ -46,6 +47,8 @@ public class StateManager : MonoBehaviour
         {
             thisText.text = "Ready? FIGHT!";
             buttonText.text = "Flip Cards";
+            DM.DecideFate();
+            
             turnCount = 0;
         }
     }
@@ -81,5 +84,14 @@ public class StateManager : MonoBehaviour
     public HandManager GetPlayer2Hand()
     {
         return Player2Hand;
+    }
+
+    public List<CardDisplay> GetCardsPlayed()
+    {
+        List<CardDisplay> results = new List<CardDisplay>();
+        CardDisplay[] cards = PlayedCards.GetComponentsInChildren<CardDisplay>();
+        results.Add(cards[0]);
+        results.Add(cards[1]);
+        return results;
     }
 }
