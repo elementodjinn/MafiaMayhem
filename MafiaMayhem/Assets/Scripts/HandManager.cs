@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HandManager : MonoBehaviour
 {
-    private List<GameObject> currentHand;
+    [SerializeField] private List<GameObject> currentHand;
 
     [SerializeField] private DeckInfo Deck;
 
@@ -20,10 +20,12 @@ public class HandManager : MonoBehaviour
 
     public void drawFullHand()
     {
-            for (int i = currentHand.Count; i < 5; i++)
-            {
-                drawCard();
-            }
+        Debug.Log("Trying to Draw");
+        for (int i = currentHand.Count; i < 5; i++)
+        {
+            Debug.Log("Drawing");
+            drawCard();
+        }
 
     }
 
@@ -65,24 +67,41 @@ public class HandManager : MonoBehaviour
     //Removes a card from the hand and adds it to the discard pile
     public void Discard(CardDisplay card)
     {
-        GameObject cardObject = card.gameObject;
-        RemoveCard(cardObject);
-        DDHL.AddCardToDiscard(card);
+        GameObject cardObject = null;
+        foreach(GameObject c in currentHand)
+        {
+            if(c.GetComponent<CardDisplay>().card == card.getCard())
+            {
+                cardObject = c;
+            }
+        }
+        currentHand.Remove(cardObject);
+        DDHL.AddCardToDiscard(cardObject);
     }
 
     //Removes a card from the hand
-    public void RemoveCard(GameObject card)
+    public void RemoveCard(CardDisplay card)
     {
-        currentHand.Remove(card);
+        Debug.Log("Removing Card" + card.name);
+        GameObject cardObject = null;
+        foreach (GameObject c in currentHand)
+        {
+            if (c.GetComponent<CardDisplay>().card == card.getCard())
+            {
+                cardObject = c;
+            }
+        }
+        currentHand.Remove(cardObject);
     }
 
     public void DiscardWholeHand()
     {
-        for(int i = 0; i < 5; i++)
+        int j = currentHand.Count;
+        for (int i = 0; i < j; i++)
         {
             GameObject card = currentHand[0];
             currentHand.RemoveAt(0);
-            DDHL.AddCardToDiscard(card.GetComponent<CardDisplay>());
+            DDHL.AddCardToDiscard(card);
         }
     }
 

@@ -11,9 +11,9 @@ public class DeckDiscardHandLinker : MonoBehaviour
     [SerializeField]
     private HandManager hand;
 
-    public void AddCardToDiscard(CardDisplay card)
+    public void AddCardToDiscard(GameObject card)
     {
-        discard.AddCard(card.gameObject);
+        discard.AddCard(card);
     }
 
     public void ShuffleDiscardIntoDeck()

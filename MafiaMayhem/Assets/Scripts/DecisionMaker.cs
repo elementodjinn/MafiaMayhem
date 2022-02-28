@@ -7,8 +7,8 @@ public class DecisionMaker : MonoBehaviour
     [SerializeField]
     private StateManager stateManager;
 
-    private GameObject card1;
-    private GameObject card2;
+    private CardDisplay card1;
+    private CardDisplay card2;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +25,8 @@ public class DecisionMaker : MonoBehaviour
     public void DecideFate()
     {
         List<CardDisplay> cards = stateManager.GetCardsPlayed();
-        card1 = cards[0].gameObject;
-        card2 = cards[1].gameObject;
+        card1 = cards[0];
+        card2 = cards[1];
         CardInfo p1 = cards[0].getCard();
         CardInfo p2 = cards[1].getCard();
         if (p1 == p2)
@@ -39,7 +39,9 @@ public class DecisionMaker : MonoBehaviour
             }
             else if (p1.CardName == "Pistol")
             {
-                //Minigame
+                //Minigame, but for now nothing
+                Discard(true);
+                Discard(false);
             }
             else
             {
@@ -55,6 +57,7 @@ public class DecisionMaker : MonoBehaviour
             {
                 //Change In Plans function p1 v p2
                 CIP(false);
+                Discard(true);
             }
             else
             {
@@ -62,19 +65,23 @@ public class DecisionMaker : MonoBehaviour
                 {
                     if (p1.CardName == "Guard")
                     {
-                        //Guard Minigame
+                        //Guard Minigame but for now nothing
+                        Discard(true);
+                        Discard(false);
                     }
                     else if (p1.CardName == "Throw")
                     {
                         //Damage Function
                         Damage(false);
-                        //Throw Minigame
+                        //Throw Minigame but for now nothing
+                        Discard(true);
                     }
                 }
                 else
                 {
                     //Damage Function (Melee v Throw, Pistol v Melee, All damaging ones v reload)
                     Damage(false);
+                    Discard(true);
                 }
             }
         }
@@ -84,6 +91,7 @@ public class DecisionMaker : MonoBehaviour
             {
                 //Change In Plans function p2 v p1
                 CIP(true);
+                Discard(false);
             }
             else
             {
@@ -92,18 +100,22 @@ public class DecisionMaker : MonoBehaviour
                     if (p2.CardName == "Guard")
                     {
                         //Guard Minigame
+                        Discard(true);
+                        Discard(false);
                     }
                     else if (p2.CardName == "Throw")
                     {
                         //Damage Function
                         Damage(true);
                         //Throw Minigame
+                        Discard(false);
                     }
                 }
                 else
                 {
                     //Damage Function (Melee v Throw, Pistol v Melee, All damaging ones v reload)
                     Damage(true);
+                    Discard(false);
                 }
             }
         }
@@ -120,6 +132,7 @@ public class DecisionMaker : MonoBehaviour
         {
             Reload(false);
         }
+        Debug.Log("Triggered");
         stateManager.GetPlayer1Hand().drawFullHand();
 
         stateManager.GetPlayer2Hand().drawFullHand();
@@ -132,12 +145,12 @@ public class DecisionMaker : MonoBehaviour
         if (player)
         {
             HandManager hand = stateManager.GetPlayer1Hand();
-            hand.RemoveCard(card1.gameObject);
+            hand.RemoveCard(card1);
         }
         else
         {
             HandManager hand = stateManager.GetPlayer2Hand();
-            hand.RemoveCard(card2.gameObject);
+            hand.RemoveCard(card2);
         }
     }
 
@@ -148,12 +161,12 @@ public class DecisionMaker : MonoBehaviour
         if (player)
         {
             HandManager hand = stateManager.GetPlayer1Hand();
-            hand.Discard(card1.GetComponent<CardDisplay>());
+            hand.Discard(card1);
         }
         else
         {
             HandManager hand = stateManager.GetPlayer2Hand();
-            hand.Discard(card1.GetComponent<CardDisplay>());
+            hand.Discard(card2);
         }
     }
 
