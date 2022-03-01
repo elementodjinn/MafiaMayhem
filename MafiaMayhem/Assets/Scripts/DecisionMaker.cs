@@ -40,6 +40,7 @@ public class DecisionMaker : MonoBehaviour
             else if (p1.CardName == "Pistol")
             {
                 //Minigame, but for now nothing
+                Debug.Log("Target Practice");
                 Discard(true);
                 Discard(false);
             }
@@ -66,6 +67,7 @@ public class DecisionMaker : MonoBehaviour
                     if (p1.CardName == "Guard")
                     {
                         //Guard Minigame but for now nothing
+                        Debug.Log("Guard Minigame");
                         Discard(true);
                         Discard(false);
                     }
