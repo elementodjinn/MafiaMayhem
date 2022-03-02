@@ -80,12 +80,14 @@ public class StateManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.E) && !p1SelfDamage)
             {
                 DM.Damage(true);
+                Player1Hand.drawFullHand();
                 p1SelfDamage = true;
             }
 
             if (Input.GetKeyDown(KeyCode.P) && !p2SelfDamage)
             {
                 DM.Damage(false);
+                Player2Hand.drawFullHand();
                 p2SelfDamage = true;
             }
         }
