@@ -10,6 +10,7 @@ public class CardPlayer : MonoBehaviour
     [SerializeField] private CardDisplay assignedCard;
 
     [SerializeField] private StateManager stateManager;
+    [SerializeField] private DecisionMaker DM;
     public void PlayCard(CardInfo newCard)
     {
         //if player 1's turn, put this card in player 1's spot
@@ -25,11 +26,22 @@ public class CardPlayer : MonoBehaviour
 
     public void chooseCard()
     {
+        
         if (stateManager.currentplayerTurn() == 0)//if we're in the throw minigame
         {
+            Debug.Log(assignedCard.card.name);
             if (assignedCard.card.name == "Throw")
             {
-                
+                if(stateManager.whoseThrowing)//true when p1 played the throw card, false if p2 played the throw card
+                {
+                    DM.Damage(false);
+                }
+                else
+                {
+                    DM.Damage(true);
+                }
+                stateManager.GetPlayer1Hand().drawFullHand();
+                stateManager.GetPlayer2Hand().drawFullHand();
             }
         }
         else

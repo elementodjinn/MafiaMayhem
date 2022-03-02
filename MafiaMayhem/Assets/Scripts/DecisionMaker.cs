@@ -25,6 +25,23 @@ public class DecisionMaker : MonoBehaviour
         
     }
 
+    public CardDisplay getP1PlayedCard()
+    {
+        if(card1)
+        {
+            return card1;
+        }
+        return null;
+    }
+
+    public CardDisplay getP2PlayedCard()
+    {
+        if (card2)
+        {
+            return card2;
+        }
+        return null;
+    }
     //Does the logic for the two selected cards, deals damage, and then draws for their new hands.
     public void DecideFate()
     {

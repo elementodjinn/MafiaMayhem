@@ -38,6 +38,8 @@ public class StateManager : MonoBehaviour
 
     private int turnCount = 1;
     private bool firstTurn = true;
+
+    public bool whoseThrowing; //if true, p1 played the throw card in a throw minigame, if false, p2 did it
     private void Start()
     {
         //start on player 1's turn
@@ -178,9 +180,16 @@ public class StateManager : MonoBehaviour
             Debug.Log("throw Minigame");
             RoundButton.gameObject.SetActive(false);
             ThrowButton.gameObject.SetActive(true);
-            //Player2Hand.showHand();
-            
-
+            if(DM.getP1PlayedCard() != null && DM.getP1PlayedCard().getCard().CardName == "Throw")
+            {
+                Player2Hand.showHand();
+                whoseThrowing = true;
+            }
+            else if(DM.getP2PlayedCard() != null && DM.getP2PlayedCard().getCard().CardName == "Throw")
+            {
+                Player1Hand.showHand();
+                whoseThrowing = false;
+            }
 
         }
         else if(DM.projectileMinigame)
