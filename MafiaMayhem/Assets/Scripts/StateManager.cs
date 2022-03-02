@@ -57,23 +57,29 @@ public class StateManager : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.E) && p2wins == false) //if player 1 hit E
             {
                 p1wins = true;
+                
             }
 
             if(Input.GetKeyDown(KeyCode.P) && p1wins == false) //if Player 2 hit P
             {
                 p2wins = true;
+                
             }
 
             if(p1wins)
             {
                 Debug.Log("Player 1 wins");
+                DM.Damage(false);
+                Player2Hand.drawFullHand();
             }
             else if(p2wins)
             {
                 Debug.Log("Player 2 wins");
+                DM.Damage(true);
+                Player1Hand.drawFullHand();
             }
-
             
+
         }
         //if the melee minigame is inactive, then pressing E or P results in a false start
         //during a false start, pressing a key does damage to yourself
