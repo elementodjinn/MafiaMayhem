@@ -169,6 +169,9 @@ public class StateManager : MonoBehaviour
         else if(DM.throwMinigame)
         {
             Debug.Log("throw Minigame");
+            Player2Hand.showHand();
+            throwCanvas.SetActive(true);
+
         }
         else if(DM.projectileMinigame)
         {
