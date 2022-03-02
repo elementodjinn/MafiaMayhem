@@ -9,11 +9,14 @@ public class StateManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI thisText;
     [SerializeField] private Image backdrop;
     [SerializeField] private Button nextButton;
+    [SerializeField] private Button RoundButton;
+    [SerializeField] private Button ThrowButton;
     [SerializeField] private TextMeshProUGUI buttonText;
 
     [SerializeField] private GameObject handDisplay;
     [SerializeField] private GameObject PlayedCards;
     [SerializeField] private GameObject handButtons;
+    [SerializeField] private GameObject hider;
 
     [SerializeField] private HandManager Player1Hand;
     [SerializeField] private HandManager Player2Hand;
@@ -100,6 +103,7 @@ public class StateManager : MonoBehaviour
             p2SelfDamage = false;
             Player1Hand.showHand();
             thisText.text = "Player 1, pick a card. Player 2, eyes off the screen!";
+            buttonText.text = "Next";
         }
         else if(turnCount == 2) //player 2's turn
         {
@@ -108,6 +112,7 @@ public class StateManager : MonoBehaviour
         }
         else if(turnCount == 3) //sets up pre flip screen
         {
+            
             thisText.text = "Ready? FIGHT!";
             buttonText.text = "Flip Cards";
             DM.DecideFate();
@@ -169,13 +174,22 @@ public class StateManager : MonoBehaviour
         else if(DM.throwMinigame)
         {
             Debug.Log("throw Minigame");
-            Player2Hand.showHand();
-            throwCanvas.SetActive(true);
+            RoundButton.gameObject.SetActive(false);
+            ThrowButton.gameObject.SetActive(true);
+            //Player2Hand.showHand();
+            
+
 
         }
         else if(DM.projectileMinigame)
         {
             Debug.Log("Target Practice");
         }
+    }
+
+    public void throwMinigame()
+    {
+        throwCanvas.SetActive(true);
+        PlayedCards.SetActive(false);
     }
 }

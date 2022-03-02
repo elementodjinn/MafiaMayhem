@@ -10,7 +10,6 @@ public class CardPlayer : MonoBehaviour
     [SerializeField] private CardDisplay assignedCard;
 
     [SerializeField] private StateManager stateManager;
-    [SerializeField] private GameObject Hider;
     public void PlayCard(CardInfo newCard)
     {
         //if player 1's turn, put this card in player 1's spot
@@ -28,7 +27,6 @@ public class CardPlayer : MonoBehaviour
     {
         if (stateManager.currentplayerTurn() == 0)//if we're in the throw minigame
         {
-            Hider.SetActive(false);
             if (assignedCard.card.name == "Throw")
             {
                 
