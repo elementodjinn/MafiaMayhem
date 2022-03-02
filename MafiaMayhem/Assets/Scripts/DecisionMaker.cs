@@ -9,6 +9,10 @@ public class DecisionMaker : MonoBehaviour
 
     private CardDisplay card1;
     private CardDisplay card2;
+
+    public bool meleeMinigame = false;
+    public bool throwMinigame = false;
+    public bool projectileMinigame = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +44,7 @@ public class DecisionMaker : MonoBehaviour
             else if (p1.CardName == "Pistol")
             {
                 //Minigame, but for now nothing
-                Debug.Log("Target Practice");
+                projectileMinigame = true;
                 Discard(true);
                 Discard(false);
             }
@@ -67,13 +71,14 @@ public class DecisionMaker : MonoBehaviour
                     if (p1.CardName == "Guard")
                     {
                         //Guard Minigame but for now nothing
-                        Debug.Log("Guard Minigame");
+                        meleeMinigame = true;
                         Discard(true);
                         Discard(false);
                     }
                     else if (p1.CardName == "Throw")
                     {
                         //Damage Function
+                        throwMinigame = true;
                         Damage(false);
                         //Throw Minigame but for now nothing
                         Discard(true);
@@ -102,12 +107,14 @@ public class DecisionMaker : MonoBehaviour
                     if (p2.CardName == "Guard")
                     {
                         //Guard Minigame
+                        meleeMinigame = true;
                         Discard(true);
                         Discard(false);
                     }
                     else if (p2.CardName == "Throw")
                     {
                         //Damage Function
+                        throwMinigame = true;
                         Damage(true);
                         //Throw Minigame
                         Discard(false);
@@ -134,7 +141,7 @@ public class DecisionMaker : MonoBehaviour
         {
             Reload(false);
         }
-        Debug.Log("Triggered");
+        //Debug.Log("Triggered");
         stateManager.GetPlayer1Hand().drawFullHand();
 
         stateManager.GetPlayer2Hand().drawFullHand();
@@ -147,12 +154,26 @@ public class DecisionMaker : MonoBehaviour
         if (player)
         {
             HandManager hand = stateManager.GetPlayer1Hand();
-            hand.RemoveCard(card1);
+            if (card1)
+            { 
+                hand.RemoveCard(card1);
+            }
+            else
+            {
+                hand.TakeDamageFromDeck(1);
+            }
         }
         else
         {
             HandManager hand = stateManager.GetPlayer2Hand();
-            hand.RemoveCard(card2);
+            if (card2)
+            {
+                hand.RemoveCard(card2);
+            }
+            else
+            {
+                hand.TakeDamageFromDeck(1);
+            }
         }
     }
 

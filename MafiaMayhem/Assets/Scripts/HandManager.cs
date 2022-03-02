@@ -20,10 +20,10 @@ public class HandManager : MonoBehaviour
 
     public void drawFullHand()
     {
-        Debug.Log("Trying to Draw");
+        //Debug.Log("Trying to Draw");
         for (int i = currentHand.Count; i < 5; i++)
         {
-            Debug.Log("Drawing");
+            //Debug.Log("Drawing");
             drawCard();
         }
 

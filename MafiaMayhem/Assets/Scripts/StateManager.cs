@@ -19,6 +19,20 @@ public class StateManager : MonoBehaviour
     [SerializeField] private HandManager Player2Hand;
     [SerializeField] private DecisionMaker DM;
 
+
+    [Header("Minigame Canvas'")]
+    [SerializeField] private GameObject MeleeCanvas;
+    [SerializeField] private GameObject throwCanvas;
+    [SerializeField] private GameObject ProjectileCanvas;
+
+    //used specifically for melee minigame, becomes true when one player presses their key
+    private bool p1wins = false; 
+    private bool p2wins = false;
+
+    //used to prevent players from hurting themselves multiple times in one turn
+    private bool p1SelfDamage = false;
+    private bool p2SelfDamage = false;
+
     private int turnCount = 1;
     private bool firstTurn = true;
     private void Start()
@@ -27,14 +41,63 @@ public class StateManager : MonoBehaviour
         thisText.text = "Player 1, pick a card. Player 2, eyes off the screen!";
         backdrop.enabled = true;
         nextButton.enabled = true;
+        MeleeCanvas.SetActive(false);
     }
+
+    private void Update()
+    {
+        if(MeleeCanvas.activeInHierarchy)
+        {
+            
+            if(Input.GetKeyDown(KeyCode.E) && p2wins == false) //if player 1 hit E
+            {
+                p1wins = true;
+            }
+
+            if(Input.GetKeyDown(KeyCode.P) && p1wins == false) //if Player 2 hit P
+            {
+                p2wins = true;
+            }
+
+            if(p1wins)
+            {
+                Debug.Log("Player 1 wins");
+            }
+            else if(p2wins)
+            {
+                Debug.Log("Player 2 wins");
+            }
+
+            
+        }
+        //if the melee minigame is inactive, then pressing E or P results in a false start
+        //during a false start, pressing a key does damage to yourself
+        else if (turnCount == 0) 
+        { 
+            if(Input.GetKeyDown(KeyCode.E) && !p1SelfDamage)
+            {
+                DM.Damage(true);
+                p1SelfDamage = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.P) && !p2SelfDamage)
+            {
+                DM.Damage(false);
+                p2SelfDamage = true;
+            }
+        }
+
+    }
+
     public void determineCurrentPhase() //more controls the screens between turns if that makes sense
     {
-        Debug.Log(turnCount);
+        //Debug.Log(turnCount);
         if (turnCount == 1) //player 1's turn
         {
             PlayedCards.SetActive(false);
             handDisplay.SetActive(true);
+            p1SelfDamage = false;
+            p2SelfDamage = false;
             Player1Hand.showHand();
             thisText.text = "Player 1, pick a card. Player 2, eyes off the screen!";
         }
@@ -60,6 +123,7 @@ public class StateManager : MonoBehaviour
             PlayedCards.SetActive(true);
             handDisplay.SetActive(false);
             handButtons.SetActive(false);
+            minigameCheck();
         }
         else
         {
@@ -93,5 +157,22 @@ public class StateManager : MonoBehaviour
         results.Add(cards[0]);
         results.Add(cards[1]);
         return results;
+    }
+
+    public void minigameCheck()
+    {
+        if(DM.meleeMinigame)
+        {
+            Debug.Log("melee Minigame");
+            MeleeCanvas.SetActive(true);
+        }
+        else if(DM.throwMinigame)
+        {
+            Debug.Log("throw Minigame");
+        }
+        else if(DM.projectileMinigame)
+        {
+            Debug.Log("Target Practice");
+        }
     }
 }
