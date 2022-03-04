@@ -79,6 +79,8 @@ public class StateManager : MonoBehaviour
                 DM.Damage(true);
                 Player1Hand.drawFullHand();
             }
+            DM.meleeMinigame = false;
+            RoundButton.gameObject.SetActive(true);
             
 
         }
@@ -206,7 +208,7 @@ public class StateManager : MonoBehaviour
         }
         else
         {
-            Debug.Log();
+            Debug.Log("No Minigames");
             RoundButton.gameObject.SetActive(true);
         }
     }
