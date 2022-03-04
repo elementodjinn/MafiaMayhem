@@ -11,6 +11,7 @@ public class StateManager : MonoBehaviour
     [SerializeField] private Button nextButton;
     [SerializeField] private Button RoundButton;
     [SerializeField] private Button ThrowButton;
+    [SerializeField] private Button ProjectileButton;
     [SerializeField] private TextMeshProUGUI buttonText;
 
     [SerializeField] private GameObject handDisplay;
@@ -39,7 +40,7 @@ public class StateManager : MonoBehaviour
     private int turnCount = 1;
     private bool firstTurn = true;
 
-    public bool whoseThrowing; //if true, p1 played the throw card in a throw minigame, if false, p2 did it
+    [HideInInspector] public bool whoseThrowing; //if true, p1 played the throw card in a throw minigame, if false, p2 did it
     private void Start()
     {
         //start on player 1's turn
@@ -201,12 +202,20 @@ public class StateManager : MonoBehaviour
         else if(DM.projectileMinigame)
         {
             Debug.Log("Target Practice");
+            RoundButton.gameObject.SetActive(false);
+            ProjectileButton.gameObject.SetActive(true);
         }
     }
 
     public void throwMinigame()
     {
         throwCanvas.SetActive(true);
+        PlayedCards.SetActive(false);
+    }
+
+    public void ProjectileMinigame()
+    {
+        ProjectileCanvas.SetActive(true);
         PlayedCards.SetActive(false);
     }
 }
