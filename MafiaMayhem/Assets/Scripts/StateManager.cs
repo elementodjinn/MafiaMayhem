@@ -127,7 +127,6 @@ public class StateManager : MonoBehaviour
             thisText.text = "Ready? FIGHT!";
             buttonText.text = "Flip Cards";
             DM.DecideFate();
-            
             turnCount = 0;
         }
     }
@@ -204,6 +203,11 @@ public class StateManager : MonoBehaviour
             Debug.Log("Target Practice");
             RoundButton.gameObject.SetActive(false);
             ProjectileButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log();
+            RoundButton.gameObject.SetActive(true);
         }
     }
 
