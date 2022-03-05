@@ -52,7 +52,7 @@ public class StateManager : MonoBehaviour
 
     private void Update()
     {
-        if(MeleeCanvas.activeInHierarchy)
+        if(MeleeCanvas.activeInHierarchy && (!p1wins && !p2wins))
         {
             
             if(Input.GetKeyDown(KeyCode.E) && p2wins == false) //if player 1 hit E
