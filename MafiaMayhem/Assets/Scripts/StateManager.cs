@@ -19,8 +19,8 @@ public class StateManager : MonoBehaviour
     [SerializeField] private GameObject handButtons;
     [SerializeField] private GameObject hider;
 
-    [SerializeField] private HandManager Player1Hand;
-    [SerializeField] private HandManager Player2Hand;
+    [SerializeField] public HandManager Player1Hand;
+    [SerializeField] public HandManager Player2Hand;
     [SerializeField] private DecisionMaker DM;
 
 

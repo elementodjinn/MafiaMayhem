@@ -17,8 +17,10 @@ public class ProjectileStateManager : MonoBehaviour
     [SerializeField] private Button ValidTargetArea;
     [SerializeField] private Button InvalidTargetArea;
     [SerializeField] private GameObject throwingCard;
+    [SerializeField] private GameObject RoundButton;
+    [SerializeField] private StateManager SM;
     private Camera Cam;
-    private int currentStage = 0;
+    [HideInInspector] public int currentStage = 0;
 
     private bool shooting;
     GameObject newTarget;
@@ -28,6 +30,8 @@ public class ProjectileStateManager : MonoBehaviour
     private GameObject spawnedCard;
     private Rigidbody2D RB;
     private bool shot = false;
+    private DealProjectileDamage damageChecker;
+    private bool damageDone = false;
 
     public void Start()
     {
@@ -37,35 +41,58 @@ public class ProjectileStateManager : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if((currentStage == 2 || currentStage == 4) && !backdrop.IsActive() && !shot)
-        {
-            if(Input.GetMouseButton(0))
-            {
-                chargePower += Time.deltaTime * 100;
-                Debug.Log("Power is at: " + chargePower);
-                if(!spawnedCard)
-                {
-                    spawnedCard = Instantiate(throwingCard, Input.mousePosition, Quaternion.identity);
-                    spawnedCard.transform.parent = this.transform;
-                    spawnedCard.transform.SetSiblingIndex(1);
-                    RB = spawnedCard.GetComponent<Rigidbody2D>();
-                }
-            }
-            else
-            {
-                shoot();
-            }
-        }
-        else if (shot && RB)
+        if(DM.projectileMinigame)
         {
 
-            RB.velocity = RB.velocity * 0.99f;
-            Debug.Log(RB.velocity);
-            if (RB.velocity.y < 1)
+            if ((currentStage == 2 || currentStage == 4) && !backdrop.IsActive() && !shot)
             {
-                thisText.gameObject.SetActive(true);
-                backdrop.gameObject.SetActive(true);
-                nextButton.gameObject.SetActive(true);
+                if (Input.GetMouseButton(0))
+                {
+                    chargePower += Time.deltaTime * 100;
+                    //Debug.Log("Power is at: " + chargePower);
+                    if (!spawnedCard)
+                    {
+                        spawnedCard = Instantiate(throwingCard, Input.mousePosition, Quaternion.identity);
+                        spawnedCard.transform.parent = this.transform;
+                        spawnedCard.transform.SetSiblingIndex(1);
+                        RB = spawnedCard.GetComponent<Rigidbody2D>();
+                    }
+                }
+                else
+                {
+                    shoot();
+                }
+            }
+            else if (shot && RB)
+            {
+
+                RB.velocity = RB.velocity * 0.99f;
+                //Debug.Log(RB.velocity);
+                if (RB.velocity.y < 1)
+                {
+                    thisText.gameObject.SetActive(true);
+                    backdrop.gameObject.SetActive(true);
+                    if (currentStage == 2)
+                    {
+                        if(damageChecker.isTouching && !damageDone)
+                        {
+                            DM.Damage(true);
+                            SM.Player1Hand.drawFullHand();
+                            damageDone = true;
+                        }
+                        nextButton.gameObject.SetActive(true);
+                    }
+                    else if (currentStage == 4)
+                    {
+                        if (damageChecker.isTouching && !damageDone)
+                        {
+                            DM.Damage(false);
+                            SM.Player2Hand.drawFullHand();
+                            damageDone = true;
+                        }
+                        RoundButton.SetActive(true);
+                    }
+                }
             }
         }
 
@@ -82,11 +109,13 @@ public class ProjectileStateManager : MonoBehaviour
             InvalidTargetArea.gameObject.SetActive(true);
             ValidTargetArea.gameObject.SetActive(true);
             SeparationLine.SetActive(true);
+            damageDone = false;
         }
         else if (currentStage == 2) //player 2 is taking a shot
         {
             shooting = true;
             SeparationLine.SetActive(true);
+            damageDone = false;
         }
         else if(currentStage == 3) //player 2 is placing a crosshair
         {
@@ -103,30 +132,24 @@ public class ProjectileStateManager : MonoBehaviour
             }
             shot = false;
             SeparationLine.SetActive(true);
+            damageDone = false;
         }
         else if(currentStage == 4) //player 1 is taking a shot
         {
             shooting = true;
             SeparationLine.SetActive(true);
-
+            damageDone = false;
         }
         else if(currentStage == 5)
         {
             currentStage = 0;
             DM.projectileMinigame = false;
-            if (spawnedCard)
-            {
-                Destroy(spawnedCard);
-                spawnedCard = null;
-            }
-            if(newTarget)
-            {
-                Destroy(newTarget);
-                newTarget = null;
-            }
-            shot = false;
+            
             SeparationLine.SetActive(false);
 
+            ValidTargetArea.gameObject.SetActive(false);
+            InvalidTargetArea.gameObject.SetActive(false);
+            damageDone = false;
         }
     }
 
@@ -138,11 +161,12 @@ public class ProjectileStateManager : MonoBehaviour
             newTarget = Instantiate(Target, mousePosition, Quaternion.identity);
             newTarget.transform.parent = this.transform;
             newTarget.transform.SetSiblingIndex(0);
+            damageChecker = newTarget.GetComponent<DealProjectileDamage>();
             if (currentStage == 1)
             {
                 thisText.text = "Player 2, shoot your shot!";
             }
-            else
+            else if(currentStage == 3)
             {
                 thisText.text = "Player 1, take aim!";
             }
@@ -165,11 +189,35 @@ public class ProjectileStateManager : MonoBehaviour
     {
         if(RB)
         {
+            if(currentStage == 2)
+            {
+                thisText.text = "Player 2, place a target";
+            }
+            else if(currentStage == 4)
+            {
+                thisText.text = "and Back to the Bout!";
+            }
             RB.velocity = chargePower * Vector2.up;
             chargePower = 0;
             InvalidTargetArea.gameObject.SetActive(false);
             ValidTargetArea.gameObject.SetActive(false);
             shot = true;
         }
+    }
+
+    public void Clear()
+    {
+        if (spawnedCard)
+        {
+            Destroy(spawnedCard);
+            spawnedCard = null;
+        }
+        if (newTarget)
+        {
+            Destroy(newTarget);
+            newTarget = null;
+        }
+        shot = false;
+        DM.projectileMinigame = false;
     }
 }
