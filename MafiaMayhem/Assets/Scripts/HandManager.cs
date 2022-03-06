@@ -109,4 +109,13 @@ public class HandManager : MonoBehaviour
     {
         DDHL.TakeExtraDamage(i);
     }
+
+    public bool DeckisEmpty()
+    {
+        if(Deck.getCount() == 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

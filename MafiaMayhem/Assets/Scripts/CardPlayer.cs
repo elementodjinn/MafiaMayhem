@@ -43,6 +43,7 @@ public class CardPlayer : MonoBehaviour
                 stateManager.GetPlayer1Hand().drawFullHand();
                 stateManager.GetPlayer2Hand().drawFullHand();
             }
+            DM.throwMinigame = false;
         }
         else
         {

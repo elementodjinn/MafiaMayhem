@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class StateManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI thisText;
+    [SerializeField] private TextMeshProUGUI VictoryText;
     [SerializeField] private Image backdrop;
     [SerializeField] private Button nextButton;
     [SerializeField] private Button RoundButton;
@@ -28,6 +29,7 @@ public class StateManager : MonoBehaviour
     [SerializeField] private GameObject MeleeCanvas;
     [SerializeField] private GameObject throwCanvas;
     [SerializeField] private GameObject ProjectileCanvas;
+    [SerializeField] private GameObject VictoryCanvas;
 
     //used specifically for melee minigame, becomes true when one player presses their key
     private bool p1wins = false; 
@@ -182,6 +184,7 @@ public class StateManager : MonoBehaviour
         {
             Debug.Log("melee Minigame");
             MeleeCanvas.SetActive(true);
+            RoundButton.gameObject.SetActive(true);
         }
         else if(DM.throwMinigame)
         {
@@ -223,5 +226,20 @@ public class StateManager : MonoBehaviour
     {
         ProjectileCanvas.SetActive(true);
         PlayedCards.SetActive(false);
+    }
+
+    public void CheckforVictor()
+    {
+        
+        if(Player1Hand.DeckisEmpty())
+        {
+            VictoryCanvas.SetActive(true);
+            VictoryText.text = "Player 2 Wins!";
+        }
+        else if(Player2Hand.DeckisEmpty())
+        {
+            VictoryCanvas.SetActive(true);
+            VictoryText.text = "Player 1 wins!";
+        }
     }
 }
