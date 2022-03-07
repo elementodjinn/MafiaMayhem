@@ -966,12 +966,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisText: {fileID: 1700827059}
+  VictoryText: {fileID: 0}
   backdrop: {fileID: 463183595}
   nextButton: {fileID: 1122445258}
+  RoundButton: {fileID: 0}
+  ThrowButton: {fileID: 0}
+  ProjectileButton: {fileID: 0}
   buttonText: {fileID: 938582015}
   handDisplay: {fileID: 980164137}
+  PlayedCards: {fileID: 0}
+  handButtons: {fileID: 0}
+  hider: {fileID: 0}
   Player1Hand: {fileID: 1088858220}
   Player2Hand: {fileID: 1713572821}
+  DM: {fileID: 0}
+  MeleeCanvas: {fileID: 0}
+  throwCanvas: {fileID: 0}
+  ProjectileCanvas: {fileID: 0}
+  VictoryCanvas: {fileID: 0}
+  whoseThrowing: 0
 --- !u!1 &452921252
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,7 +3286,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df275416a3d76a438d73907384a7915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHand: []
   Deck: {fileID: 452921254}
+  DDHL: {fileID: 0}
   visibleCards:
   - {fileID: 3954785961305253732}
   - {fileID: 3954785960204389834}
@@ -4644,7 +4659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df275416a3d76a438d73907384a7915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHand: []
   Deck: {fileID: 644096294}
+  DDHL: {fileID: 0}
   visibleCards:
   - {fileID: 3954785961305253732}
   - {fileID: 3954785960204389834}
