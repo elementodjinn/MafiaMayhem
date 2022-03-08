@@ -185,3 +185,15 @@ Received Import Request.
 Start importing Assets/Scenes/Main Menu.unity using Guid(d6ec13d0a60938848b4252722d89d734) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '462f1ba8c6c77bf834fe1435d83c2630') in 0.007131 seconds
   Import took 0.009991 seconds .
 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 1.71 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 49.6 MB.
+System memory in use after: 49.8 MB.
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 2286.
+Total: 10.225000 ms (FindLiveObjects: 0.499600 ms CreateObjectMapping: 0.273900 ms MarkObjects: 9.396800 ms  DeleteObjects: 0.051000 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
